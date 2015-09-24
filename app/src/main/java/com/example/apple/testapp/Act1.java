@@ -2,8 +2,8 @@ package com.example.apple.testapp;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.*;
+import android.support.v7.app.*;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
