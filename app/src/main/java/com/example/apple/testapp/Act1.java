@@ -2,9 +2,11 @@ package com.example.apple.testapp;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.res.Configuration;
 import android.support.v4.app.*;
 import android.support.v7.app.*;
 import android.os.Bundle;
+import android.util.Config;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +34,22 @@ public class Act1 extends AppCompatActivity implements WordsFragment.OnwordSelec
     public  void onWordSelected(int position){
         DefinitionFragment defFrag = (DefinitionFragment) getSupportFragmentManager().findFragmentById(R.id.definition_fragment);
         if(defFrag != null){
-            defFrag.updateDefinitionView(position);
+            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+            {
+                DefinitionFragment newFragment = new DefinitionFragment();
+                Bundle args = new Bundle();
+                args.putInt(DefinitionFragment.ARG_POSITION, position);
+                newFragment.setArguments(args);
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.fragment_container, newFragment);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+
+            }
+            else
+                defFrag.updateDefinitionView(position);
         }
         else{
             DefinitionFragment newFragment = new DefinitionFragment();
@@ -45,6 +62,7 @@ public class Act1 extends AppCompatActivity implements WordsFragment.OnwordSelec
             transaction.addToBackStack(null);
 
             transaction.commit();
+
         }
     }
 
@@ -73,4 +91,6 @@ public class Act1 extends AppCompatActivity implements WordsFragment.OnwordSelec
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

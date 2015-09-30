@@ -15,12 +15,17 @@ public class DefinitionFragment extends Fragment{
     final static String ARG_POSITION = "position";
     int mCurrentPosition = -1;
     TextView def;
+    LayoutInflater testInflater;
+    ViewGroup testContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         if(savedInstanceState != null){
             mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
         }
+
+        testInflater = inflater;
+        testContainer = container;
 
         View fragmentView = inflater.inflate(R.layout.definition_view, container, false);
         def = (TextView) fragmentView.findViewById(R.id.definition);
